@@ -1,24 +1,35 @@
+import { useEffect, useState } from 'react';
 import Container from './components/Container';
+import productsList from './products.json';
 
 const Item = ({ item }) => {
   return (
     <li className='item' data-testid='product-item'>
-      { /* TODO */ }
-      <img src="thumbnail here"></img>
-      <h4> title here </h4>
-      <p> description here </p>
-      <span> brand here </span>
-      <span> price here </span>
+      <img src={item.thumbnail} alt={item.title} />
+      <h4>{item.title}</h4>
+      <p>{item.description}</p>
+      <span>{item.brand}</span>
+      <span>{item.price}</span>
     </li>
   )
 }
 
 function App() {
+  const [products, setProducts] = useState()
+  useEffect(() => {
+    let filtered = productsList.filter(item => item.category === 'smartphones')
+    console.log(filtered)
+    setProducts(filtered)
+  }, [])
+  
   return (
     <Container>
       <ul className='list' data-testid='product-list'>
-        { /* TODO */ }
-        <Item />
+        {products.map(prod => {
+          return (
+            <Item item={prod} key={prod.title}/>
+          )
+        })}
       </ul>
     </Container>
   );
