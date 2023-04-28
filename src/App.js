@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import Container from './components/Container';
 import productsList from './products.json';
 
@@ -15,12 +14,7 @@ const Item = ({ item }) => {
 }
 
 function App() {
-  const [products, setProducts] = useState()
-  useEffect(() => {
-    let filtered = productsList.filter(item => item.category === 'smartphones')
-    console.log(filtered)
-    setProducts(filtered)
-  }, [])
+  const products = productsList.filter(item => item.category === 'smartphones')
   
   return (
     <Container>
